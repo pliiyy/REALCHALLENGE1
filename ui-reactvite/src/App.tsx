@@ -4,6 +4,7 @@ import ILayout from "./components/ILayout";
 import Dashboard from "./pages/Dashboard";
 import Role from "./pages/Role";
 import Login from "./pages/Login";
+import Fakultas from "./pages/Fakultas";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path="role" element={<Role />} />
           <Route path="pengguna" element={<>PENGGUNA</>} />
+          <Route path="fakultas" element={<Fakultas/>} />
           <Route
             path="*"
             element={

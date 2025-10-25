@@ -27,6 +27,11 @@ const listMenu: MenuList[] = [
     key: "/pengguna",
     icon: <UserOutlined />,
   },
+  {
+    label: "Fakultas",
+    key: "/fakultas",
+    icon: <UserOutlined />,
+  },
 ];
 
 export default listMenu;
