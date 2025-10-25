@@ -13,9 +13,9 @@ function App() {
         <Route
           path="/"
           element={
-            <PrivateRoute>
-              <ILayout />
-            </PrivateRoute>
+            // <PrivateRoute>
+            <ILayout />
+            // </PrivateRoute>
           }
         >
           <Route index element={<Dashboard />} />
