@@ -237,10 +237,17 @@ const TambahEditRole = ({
       currData.menu = currData.menu.filter(
         (m) => m.akses && m.akses.length !== 0
       );
+      const newM = currData.menu.map((m) => ({
+        ...m,
+        akses: m.akses.join(","),
+      }));
       await api({
         method: data ? "put" : "post",
         url: data ? "/role/" + data.id : "/role",
-        data: { ...data },
+        data: { ...currData, menu: newM },
+      });
+      notification.success({
+        message: `${data ? "Update" : "Tambah"} Data role berhasil!`,
       });
       setOpen(false);
       await getData();
@@ -269,6 +276,35 @@ const TambahEditRole = ({
                 value={currData.nama}
                 onChange={(e) => setData({ ...currData, nama: e.target.value })}
               />
+            </Form.Item>
+            <Form.Item label="Izin Akses">
+              {currData.menu.map((menu, i) => (
+                <div key={i}>
+                  <p>{menu.nama}</p>
+                  <div>
+                    <Checkbox.Group
+                      value={menu.akses}
+                      onChange={(e) =>
+                        setData((prev) => ({
+                          ...prev,
+                          menu: prev.menu.map((m) => {
+                            if (m.path === menu.path) {
+                              m.akses = e;
+                            }
+                            return m;
+                          }),
+                        }))
+                      }
+                    >
+                      {["lihat", "tambah", "edit", "delete", "proses"].map(
+                        (as) => (
+                          <Checkbox value={as}>{as}</Checkbox>
+                        )
+                      )}
+                    </Checkbox.Group>
+                  </div>
+                </div>
+              ))}
             </Form.Item>
             <Form.Item className="flex justify-end">
               <Button icon={<SaveFilled />} type="primary" htmlType="submit">
